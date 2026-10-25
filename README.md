@@ -1,16 +1,72 @@
-# React + Vite
+# React Persistent Timer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple timer built with React that keeps its value after a page refresh, using `localStorage`.
 
-Currently, two official plugins are available:
+**Live demo:** https://react-timer-localstorage.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Start, stop and reset the timer
+- Timer value is saved in `localStorage` and restored after a refresh
+- Running / Paused status badge
+- Buttons are disabled when they don't apply (START while running, STOP while paused)
+- Responsive layout for mobile and desktop
+- Also includes a persistent counter component (`PersistantCounter`) that uses the same idea
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- Vite
+- HTML, CSS, JavaScript
+- Deployed on Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How Persistence Works
+
+1. **Read:** `useState` uses a lazy initializer that reads the saved value from `localStorage` when the component first loads.
+2. **Write:** a `useEffect` with `[seconds]` as its dependency saves the value every time it changes.
+3. The interval is created in a separate `useEffect` that depends on `isRunning`, and it is cleaned up with `clearInterval` to avoid memory leaks.
+
+After a refresh the number is restored, but the timer stays paused until START is pressed.
+
+## Getting Started
+
+```bash
+# clone the repository
+git clone https://github.com/SaniyaTalikoti1311/react-timer-localstorage.git
+
+# go to the project folder
+cd react-timer-localstorage
+
+# install dependencies
+npm install
+
+# start the development server
+npm run dev
+```
+
+Then open the local URL shown in the terminal (usually http://localhost:5173).
+
+## Project Structure
+
+```
+src/
+  component/
+    Timer.jsx
+    Timer.css
+    PersistantCounter.jsx
+  App.jsx
+  main.jsx
+  index.css
+```
+
+## What I Learned
+
+- Using `useState` with a lazy initializer
+- Using `useEffect` with dependency arrays and cleanup functions
+- Saving and reading data with `localStorage`
+- Deploying a Vite + React app to Vercel
+
+## Author
+
+**Saniya Talikoti**
+GitHub: [@SaniyaTalikoti1311](https://github.com/SaniyaTalikoti1311)
