@@ -4,6 +4,11 @@ A simple timer built with React that keeps its value after a page refresh, using
 
 **Live demo:** https://react-timer-localstorage.vercel.app/
 
+
+
+<img width="438" height="358" alt="image" src="https://github.com/user-attachments/assets/10b35abf-5944-4b47-9fc4-4a2ad960cab0" />
+
+
 ## Features
 
 - Start, stop and reset the timer
